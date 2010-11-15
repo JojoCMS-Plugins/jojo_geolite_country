@@ -14,3 +14,14 @@
  */
  
  Jojo::addFilter('jojo_cart_checkout:populate_fields', 'populate_fields', 'jojo_geolite_country');
+ Jojo::addFilter('get_option',                         'get_option',      'jojo_geolite_country');
+ 
+ $_options[] = array(
+    'id'          => 'captcha_trusted_countries',
+    'category'    => 'Config',
+    'label'       => 'CAPTCHA trusted countries',
+    'description' => 'A comma separated list of country codes to trust more with the captcha. Visitors from trusted countries enter a half-length CAPTCHA. Eg if you expect most genuine form submissions to come from New Zealand, Australia or USA, enter NZ,AU,US',
+    'type'        => 'text',
+    'default'     => '',
+    'options'     => '',
+);

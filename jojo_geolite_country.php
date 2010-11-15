@@ -17,6 +17,22 @@
 
 class Jojo_Plugin_jojo_geolite_country extends Jojo_Plugin
 {
+    function get_option($value, $args)
+    {
+        $name = $args[0];
+        if ($name != 'captcha_num_chars') return $value; //ignore everything except captcha_num_chars
+        $options = Jojo::getOptions();
+        if (!empty($options['captcha_trusted_countries'])) {
+            $trusted_str = $options['captcha_trusted_countries'];
+            $trusted = explode(',', $trusted_str);
+            $my_country = self::getCountryCode();
+            foreach ($trusted as $country) {
+                if (strtoupper($my_country) == strtoupper($country)) return floor($value / 2);
+            }
+        }
+        return $value;
+    }
+    
     /* returns the short country code eg 'NZ' */
     function getCountryCode($ip=false)
     {
